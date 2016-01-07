@@ -57,6 +57,11 @@ public class Coord implements WritableComparable<Coord> {
     }
 
     @Override
+    public int hashCode() {
+        return x.hashCode() ^ y.hashCode();
+    }
+
+    @Override
     public String toString() {
         return String.format("(%d, %d)", x.get(), y.get());
     }
