@@ -24,7 +24,7 @@ public class MatrixMultJob {
         jobConf.set(SIZE_3_CONF_KEY, args[4]);
         jobConf.set(BLOCK_SIZE_CONF_KEY, args[5]);
 
-        Job multBlocksJob = Job.getInstance( jobConf, "multBlocks");
+        Job multBlocksJob = Job.getInstance( jobConf, "blocks_multiplication");
         multBlocksJob.setJarByClass(MatrixMultJob.class);
         multBlocksJob.setMapperClass(BlockMapper.class);
         multBlocksJob.setReducerClass(BlockReducer.class);
@@ -35,7 +35,7 @@ public class MatrixMultJob {
         FileInputFormat.addInputPath(multBlocksJob, new Path(args[0]));
         FileOutputFormat.setOutputPath(multBlocksJob, new Path("tmp"));
 
-        Job sumJob = Job.getInstance(new Configuration(), "sum");
+        Job sumJob = Job.getInstance(new Configuration(), "blocks_summation");
         sumJob.setJarByClass(MatrixMultJob.class);
         sumJob.setMapperClass(SumMapper.class);
         sumJob.setReducerClass(SumReducer.class);
